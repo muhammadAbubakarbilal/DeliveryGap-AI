@@ -1,0 +1,17 @@
+{
+  "name": "deliverygap-ai",
+  "private": true,
+  "packageManager": "pnpm@11.21.0",
+  "scripts": {
+    "dev": "pnpm --filter @deliverygap/web dev",
+    "build": "pnpm --filter @deliverygap/web build",
+    "lint": "pnpm --filter @deliverygap/web lint",
+    "typecheck": "pnpm --filter @deliverygap/web typecheck",
+    "api:types": "pnpm --filter @deliverygap/web api:types",
+    "fixtures:validate": "node scripts/validate-evaluation-fixtures.mjs"
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.2",
+    "@neon/env": "^1.6.3"
+  }
+}

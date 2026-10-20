@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "deliverygap-engineering",
+  "version": "0.1.0",
+  "description": "Engineering workflow skills for DeliveryGap AI.",
+  "author": { "name": "DeliveryGap AI" },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "DeliveryGap Engineering",
+        "shortDescription": "DeliveryGap engineering skills",
+        "longDescription": "Reusable product, architecture, implementation, security, QA, and release workflows for the DeliveryGap AI repository.",
+        "developerName": "DeliveryGap AI",
+        "category": "Developer Tools",
+        "capabilities": ["Skills"],
+        "defaultPrompt": "Use the DeliveryGap engineering workflow and the smallest relevant specialist skill for this repository task."
+      }
+    }
+  }
+}

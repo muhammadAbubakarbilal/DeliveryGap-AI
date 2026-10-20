@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Web: dev",
+			"type": "shell",
+			"command": "pnpm dev",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Web: build",
+			"type": "shell",
+			"command": "pnpm build",
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "API: dev",
+			"type": "shell",
+			"command": "uv run uvicorn app.main:app --app-dir apps/api --host 127.0.0.1 --port 8000 --reload",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "API: tests",
+			"type": "shell",
+			"command": "uv run pytest -q",
+			"group": "test",
+			"problemMatcher": []
+		},
+		{
+			"label": "Web: production",
+			"type": "shell",
+			"command": "pnpm --filter @deliverygap/web start",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

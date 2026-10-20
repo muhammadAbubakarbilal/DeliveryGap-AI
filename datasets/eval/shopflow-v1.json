@@ -1,0 +1,33 @@
+{
+  "dataset_version": "shopflow-v1",
+  "synthetic": true,
+  "split": "development",
+  "family_id": "shopflow-checkout",
+  "review_status": "pending_human_review",
+  "baseline_fixture_id": "shopflow-b1",
+  "source_path": "../synthetic_project/scope.md",
+  "requirements": [
+    {"code": "REQ-001", "span_id": "scope-001", "quote": "User registers and signs in with email/password."},
+    {"code": "REQ-002", "span_id": "scope-002", "quote": "Cart shows item prices and subtotal in USD."},
+    {"code": "REQ-003", "span_id": "scope-003", "quote": "Checkout accepts USD payments only."},
+    {"code": "REQ-004", "span_id": "scope-004", "quote": "Users receive an order confirmation email."},
+    {"code": "REQ-005", "span_id": "scope-005", "quote": "Password-reset links expire after 30 minutes."}
+  ],
+  "cases": [
+    {"id": "SF-001", "input_text": "Let users register and sign in using an email and password.", "expected_class": "IN_SCOPE", "relevant_requirement_codes": ["REQ-001"], "gold_evidence_span_ids": ["scope-001"], "notes": "Paraphrases the explicitly included authentication method."},
+    {"id": "SF-002", "input_text": "Show each cart item's USD price and the subtotal in USD.", "expected_class": "IN_SCOPE", "relevant_requirement_codes": ["REQ-002"], "gold_evidence_span_ids": ["scope-002"], "notes": "Matches the cart display requirement without adding taxes or conversion."},
+    {"id": "SF-003", "input_text": "Send an order confirmation to the user's email.", "expected_class": "IN_SCOPE", "relevant_requirement_codes": ["REQ-004"], "gold_evidence_span_ids": ["scope-004"], "notes": "Restates the confirmation email requirement."},
+    {"id": "SF-004", "input_text": "Password resets should remain as agreed.", "expected_class": "IN_SCOPE", "relevant_requirement_codes": ["REQ-005"], "gold_evidence_span_ids": ["scope-005"], "notes": "The sole reset provision supplies the referenced agreement: 30-minute expiry."},
+    {"id": "SF-005", "input_text": "Accept EUR and GBP payments at checkout as well as USD.", "expected_class": "CONFLICT", "relevant_requirement_codes": ["REQ-003"], "gold_evidence_span_ids": ["scope-003"], "notes": "Additional accepted currencies contradict the explicit USD-only condition."},
+    {"id": "SF-006", "input_text": "Keep password-reset links usable for 60 minutes.", "expected_class": "CONFLICT", "relevant_requirement_codes": ["REQ-005"], "gold_evidence_span_ids": ["scope-005"], "notes": "A link usable after 30 minutes is incompatible with the explicit expiry."},
+    {"id": "SF-007", "input_text": "Show cart prices and subtotal exclusively in EUR instead of USD.", "expected_class": "CONFLICT", "relevant_requirement_codes": ["REQ-002"], "gold_evidence_span_ids": ["scope-002"], "notes": "Replacing the required cart currency is an explicit incompatibility."},
+    {"id": "SF-008", "input_text": "Also send order confirmations by SMS.", "expected_class": "POTENTIAL_SCOPE_ADDITION", "relevant_requirement_codes": ["REQ-004"], "gold_evidence_span_ids": ["scope-004"], "notes": "SMS is additional to email, which is not stated to be exclusive. A reviewer must confirm novelty against the complete agreement."},
+    {"id": "SF-009", "input_text": "Also let users sign in with a Google account.", "expected_class": "POTENTIAL_SCOPE_ADDITION", "relevant_requirement_codes": ["REQ-001"], "gold_evidence_span_ids": ["scope-001"], "notes": "A second authentication method does not remove email/password. This is a qualified proposal, not a contractual conclusion."},
+    {"id": "SF-010", "input_text": "Add a cart estimate in EUR using automatic conversion, while retaining USD prices, subtotal, and payment.", "expected_class": "POTENTIAL_SCOPE_ADDITION", "relevant_requirement_codes": ["REQ-002", "REQ-003"], "gold_evidence_span_ids": ["scope-002", "scope-003"], "notes": "An informational estimate preserves USD-only payment; conversion is a proposed addition, subject to reviewer verification."},
+    {"id": "SF-011", "input_text": "Improve checkout.", "expected_class": "AMBIGUOUS", "relevant_requirement_codes": ["REQ-003"], "gold_evidence_span_ids": ["scope-003"], "notes": "The requested improvement has no testable behavior or acceptance condition."},
+    {"id": "SF-012", "input_text": "Make password resets more secure.", "expected_class": "AMBIGUOUS", "relevant_requirement_codes": ["REQ-005"], "gold_evidence_span_ids": ["scope-005"], "notes": "Does not specify whether expiry, delivery, or another property should change."},
+    {"id": "SF-013", "input_text": "Apply the refund rules from the missing appendix to the admin panel.", "expected_class": "INSUFFICIENT_EVIDENCE", "relevant_requirement_codes": [], "gold_evidence_span_ids": [], "notes": "The referenced appendix is unavailable and no refund requirement supplies the rules. Do not invent evidence or declare missing implementation."},
+    {"id": "SF-014", "input_text": "Use the warehouse API described in the supplier contract.", "expected_class": "INSUFFICIENT_EVIDENCE", "relevant_requirement_codes": [], "gold_evidence_span_ids": [], "notes": "No supplier contract or warehouse interface evidence is supplied."},
+    {"id": "SF-015", "input_text": "Set checkout's tax rate to the value in the latest finance policy.", "expected_class": "INSUFFICIENT_EVIDENCE", "relevant_requirement_codes": ["REQ-003"], "gold_evidence_span_ids": [], "notes": "Checkout is topically relevant, but USD-only payment provides no tax-policy evidence. Retrieval relevance is not sufficient support."}
+  ]
+}
